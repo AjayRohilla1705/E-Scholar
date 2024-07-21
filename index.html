@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>E-Scholar Research Papers</title>
+    <style>
+      /* Basic styling, you can enhance this as per your design requirements */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+      }
+
+      header {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 0.8vw;
+      }
+
+      h1 {
+        margin: 0;
+      }
+      /* Existing styles ... */
+
+      .navbar {
+        background-color: #333;
+        color: #fff;
+      }
+      .filter {
+        background-color: #333;
+        color: #fff;
+        height: 10vh;
+      }
+
+      .filter a {
+        text-decoration: none;
+        color: #0c0b0b;
+      }
+
+      .RP {
+        border: 1px solid #ccc;
+        padding: 6px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        width: 9%;
+        vertical-align: super;
+        display: flex;
+        justify-content: center;
+        top: 2.2vh;
+        left: 1vw;
+        position: relative;
+      }
+      .review {
+        border: 1px solid #ccc;
+        padding: 6px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        width: 9%;
+        vertical-align: super;
+        display: flex;
+        justify-content: center;
+        top: -3.6vh;
+        left: 30vw;
+        position: relative;
+      }
+      .cit {
+        border: 1px solid #ccc;
+        padding: 6px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        width: 9%;
+        vertical-align: super;
+        display: flex;
+        justify-content: center;
+        top: -9.3vh;
+        left: 60vw;
+        position: relative;
+      }
+
+      .PP {
+        border: 1px solid #ccc;
+        padding: 6px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        width: 9%;
+        vertical-align: super;
+        display: flex;
+        justify-content: center;
+        top: -15.1vh;
+        left: 89vw;
+        position: relative;
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+      }
+
+      .logo {
+        font-size: 24px;
+        margin: 0;
+      }
+
+      .login {
+        list-style: none;
+        padding: 0;
+      }
+
+      /*.nav-links li {
+    display: inline;
+    margin-right: 20px;
+  }*/
+
+      .container a {
+        text-decoration: none;
+        color: #060606;
+        font-weight: bold;
+      }
+
+      main {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      section {
+        margin-bottom: 20px;
+      }
+
+      input[type="text"] {
+        width: 90%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      .btn {
+        display: flex;
+        justify-content: center;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin-top: 1.5vh;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .login,
+      .about {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+      }
+      .upload-container{
+       
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>E-Scholar Research Papers</h1>
+      <nav class="navbar">
+        <div class="container">
+          <div class="login"><a href="login.html">Login</a></div>
+          <div class="about"><a href="About.html">About</a></div>
+        </div>
+      </nav>
+    </header>
+    <br />
+    <div class="filter">
+      <div class="RP"><a href="research.html">Research Paper</a></div>
+      <div class="review"><a href="review.html">Review Paper</a></div>
+      <div class="cit"><a href="citation.html">Citation Paper</a></div>
+      <div class="PP"><a href="publish.html">Publish Paper</a></div>
+    </div>
+
+    <main>
+      <section id="search-section">
+        <h2>Search for Research Papers</h2>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search by title, author, or topic"
+         />
+        <br />
+        <div class="btn"><button id="search-button">Search</button></div>
+      </section>
+
+      <section id="papers-section">
+        <h2>Recent Research Papers</h2>
+        <ul id="paper-list">
+          <!-- Research paper items will be dynamically added here -->
+        </ul>
+      </section>
+      
+    </main>
+    <div class="upload-container">
+      <h2>Upload your Research Paper here</h2>
+      <input type="file" id="pdfInput" accept=".pdf" />
+      <button onclick="uploadPDF()">Upload </button>
+  </div>
+    <script>
+      // In a real application, you would use AJAX or fetch to load data dynamically.
+      // For this example, we will simulate adding data to the list.
+
+      const paperList = document.getElementById("paper-list");
+      const searchButton = document.getElementById("search-button");
+
+      searchButton.addEventListener("click", function () {
+        // Simulate adding research paper data to the list
+        const paperData = [
+          {
+            title: "Sample Paper 1",
+            author: "John Doe",
+            topic: "Computer Science",
+          },
+          
+          { title: "Sample Paper 2", author: "Jane Smith", topic: "Biology" },
+          // Add more data as needed
+        ];
+
+        paperList.innerHTML = ""; // Clear the list
+
+        paperData.forEach((paper) => {
+          const listItem = document.createElement("li");
+          listItem.innerHTML = `<h3>${paper.title}</h3><p>Author: ${paper.author}</p><p>Topic: ${paper.topic}</p>`;
+          paperList.appendChild(listItem);
+        });
+      });
+      function uploadPDF() {
+            const input = document.getElementById('pdfInput');
+            const file = input.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const pdfContent = e.target.result;
+                    localStorage.setItem('uploadedPDF', pdfContent);
+                    alert('PDF uploaded successfully!');
+                    window.location.href = 'view.html';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please select a PDF file.');
+            }
+        }
+    </script>
+  </body>
+</html>

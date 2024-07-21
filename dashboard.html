@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E Scholar Main Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <style>
+      /* Add your improved styles here */
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #fff;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 20px 0;
+        height: 7vh;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 28px;
+      }
+
+      a#logout {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 20px;
+        transition: color 0.3s ease;
+        float: right;
+      }
+
+      a#logout:hover {
+        color: #ff5050;
+      }
+
+      a#papers {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 20px;
+        transition: color 0.3s ease;
+        float: left;
+        position: relative;
+        left: 0.5vw;
+      }
+
+      a#papers:hover {
+        color: #263109;
+      }
+
+      main {
+        background-color: #333;
+        color: #fff;
+        width: 80%;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 10px;
+      }
+
+      span {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome, <span id="studentName">[Student Name]</span></h1>
+      <a href="#" id="logout">Logout</a>
+      <a href="papers.html" id="papers">Paper Dashboard</a>
+    </header>
+
+    <main>
+      <section class="personal-info">
+        <h2>Personal Information</h2>
+        <ul>
+          <li>
+            <strong>UID:</strong> <span id="studentUID">[Student UID]</span>
+          </li>
+          <li>
+            <strong>Name:</strong>
+            <span id="studentNameInfo">[Student Name]</span>
+          </li>
+          <li>
+            <strong>Email:</strong>
+            <span id="studentEmail">[Student Email]</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="papers">
+        <h2>Your Papers</h2>
+        <ul id="paperList">
+          <!-- Dynamic paper list will be inserted here using JavaScript -->
+        </ul>
+      </section>
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const studentName = document.getElementById("studentName");
+        const studentUID = document.getElementById("studentUID");
+        const studentNameInfo = document.getElementById("studentNameInfo");
+        const studentEmail = document.getElementById("studentEmail");
+        const paperList = document.getElementById("paperList");
+        const logoutBtn = document.getElementById("logout");
+
+        // Replace these with actual data fetched from your server based on user credentials
+        const usersData = {
+          user123: {
+            name: "Raghav",
+            uid: "user123",
+            email: "raghav@example.com",
+            papers: [
+              {
+                title: "Research Paper 1",
+                type: "Research",
+                date: "2023-09-10",
+              },
+              {
+                title: "Review Paper 1",
+                type: "Review",
+                date: "2023-09-15",
+              },
+            ],
+          },
+          "21BCS10962": {
+            name: "Sajal Singh Masand",
+            uid: "user456",
+            email: "john@example.com",
+            papers: [
+              {
+                title: "Research Paper 2",
+                type: "Research",
+                date: "2023-09-12",
+              },
+              {
+                title: "Review Paper 2",
+                type: "Review",
+                date: "2023-09-18",
+              },
+            ],
+          },
+          "21BCS11298": {
+            name: "Akshay",
+            uid: "21BCS11293",
+            email: "Aksahy@example.com",
+            papers: [
+              {
+                title: "Research Paper 3",
+                type: "Research",
+                date: "2023-05-17",
+              },
+              {
+                title: "Review Paper 3",
+                type: "Review",
+                date: "2023-10-23",
+              },
+            ],
+          },
+          "21BCS11260": {
+            name: "Ajay",
+            uid: "21BCS11260",
+            email: "Ajayrohilla779@gmail.com",
+            papers: [
+              {
+                title: "Research Paper on Smart QR-CODE Generator",
+                type: "Research",
+                date: "2023-07-17",
+              },
+              {
+                title: "Review Paper on Image to pencil sketch converter",
+                type: "Review",
+                date: "2022-10-23",
+              },
+            ],
+          },
+          "21BCS11378": {
+            name: "Kuldeep Kumar Singh",
+            uid: "21BCS11378",
+            email: "kuldeep@gmail.com",
+            papers: [
+              {
+                title: "Research Paper on Movie Recommendation System",
+                type: "Research",
+                date: "2023-06-17",
+              },
+            ],
+          },
+          // Add more user data as needed2
+        };
+
+        // Get the user's UID from the URL query parameters (for demonstration purposes)
+        const urlParams = new URLSearchParams(window.location.search);
+        const uidParam = urlParams.get("uid");
+
+        // Check if the user exists
+        const loggedInUser = usersData[uidParam];
+
+        if (loggedInUser) {
+          // Populate personal information
+          studentName.textContent = loggedInUser.name;
+          studentUID.textContent = loggedInUser.uid;
+          studentNameInfo.textContent = loggedInUser.name;
+          studentEmail.textContent = loggedInUser.email;
+
+          // Populate paper list
+          loggedInUser.papers.forEach((paper) => {
+            const paperItem = document.createElement("li");
+            paperItem.innerHTML = `
+                <h3>${paper.title}</h3>
+                <p><strong>Type:</strong> ${paper.type}</p>
+                <p><strong>Date:</strong> ${paper.date}</p>
+            `;
+            paperList.appendChild(paperItem);
+          });
+
+          // Logout functionality
+          logoutBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            // Implement your logout logic here, e.g., redirect to the login page.
+            alert("Logout clicked. Implement logout logic here.");
+          });
+        } else {
+          // Handle unauthorized access here, e.g., redirect to the login page.
+          alert("Unauthorized access. Redirecting to the login page.");
+          window.location.href = "login.html";
+        }
+      });
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>

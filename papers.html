@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add your CSS styles here */
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+body {
+    font-family: Arial, sans-serif;
+    
+}
+.navbar {
+    background-color: #333;
+    color: #fff;
+    height: 15vh;
+    
+}
+
+h1 {
+    text-align: center;
+    padding: 40px ;
+    
+}
+
+#papers-list {
+    margin: 20px;
+}
+
+.paper {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.paper:hover {
+    background-color: #f0f0f0;
+}
+
+.filter{
+    left: 20px;
+    position: relative;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+    <div class="container">
+    <h1>Welcome to the Paper Dashboard</h1>
+   </nav>
+   <br>
+    <div class="filter" id="filter-options">
+        <label for="topic-filter">Filter by Topic:</label>
+        <select id="topic-filter">
+            <option value="all">All Topics</option>
+            <option value="topic1">Topic 1</option>
+            <option value="topic2">Topic 2</option>
+            <!-- Add more topic options as needed -->
+        </select>
+    </div>
+
+    <div id="papers-list">
+        <!-- Papers will be dynamically added here using JavaScript -->
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Sample data with topics (you would replace this with actual paper data)
+const papers = [
+    { title: 'Paper 1', url: 'paper1.pdf', topic: 'topic1' },
+    { title: 'Paper 2', url: 'paper2.pdf', topic: 'topic2' },
+    { title: 'Paper 3', url: 'paper3.pdf', topic: 'topic1' },
+    { title: 'Paper 4', url: 'Final Paper.pdf', topic: 'topic2' },
+    { title: 'Paper 5', url: 'Thoiba paper.pdf', topic: 'topic1' },
+    { title: 'Paper 6', url: 'E_Scholar Research Paper.pdf', topic: 'topic2' },
+    // Add more papers with topics as needed
+];
+
+// Function to add papers to the list
+function addPapersToDashboard() {
+    const papersList = document.getElementById('papers-list');
+    const topicFilter = document.getElementById('topic-filter');
+
+    // Clear existing papers
+    papersList.innerHTML = '';
+
+    // Get the selected topic from the filter
+    const selectedTopic = topicFilter.value;
+
+    papers.forEach((paper, index) => {
+        if (selectedTopic === 'all' || paper.topic === selectedTopic) {
+            const paperDiv = document.createElement('div');
+            paperDiv.classList.add('paper');
+            paperDiv.textContent = `${index + 1}. ${paper.title}`;
+
+            // Open the paper in a new tab when clicked (you can enhance this for your needs)
+            paperDiv.addEventListener('click', () => {
+                window.open(paper.url, '_blank');
+            });
+
+            papersList.appendChild(paperDiv);
+        }
+    });
+}
+
+// Call the function to add papers to the dashboard
+addPapersToDashboard();
+
+// Listen for changes in the topic filter
+const topicFilter = document.getElementById('topic-filter');
+topicFilter.addEventListener('change', addPapersToDashboard);
+
+    </script>
+</body>
+</html>
